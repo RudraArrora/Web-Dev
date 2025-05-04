@@ -1,7 +1,10 @@
 const express = require ('express');
 const path = require('path');
+const { config } = require('process');
 
 const port = 8000;
+const db = require("./config/moongose");
+const Contact = require('./model/contact');
 const app  = express();
 
 
@@ -32,12 +35,24 @@ app.get('/',function(req,res){
    });
 })
 
-app.post('/createContact',function(req,res){
-    contactList.push({
-        name:req.body.name,
-        phone: req.body.phone
-    });
-    res.redirect('/');
+app.post('/createContact',async function(req,res){
+  try {
+      await Contact.create({
+        name: req.body.name,
+        phone: req.body.phone,
+      });
+      console.log(req.body);
+        res.redirect("/");
+  } catch (error) {
+        console.log("Error in populating the DB",error);
+          res.redirect("/");
+  }
+
+    // contactList.push({
+    //     name:req.body.name,
+    //     phone: req.body.phone
+    // });
+    // res.redirect('/');
 });
 
 app.get("/deleteContact",function(req,res){

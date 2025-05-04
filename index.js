@@ -29,9 +29,11 @@ var contactList = [
   },
 ];
 
-app.get('/',function(req,res){
+app.get('/',async function(req,res){
+  let contacts =await Contact.find({});
+  console.log(contacts.name);
    return res.render('home',{
-    contact:contactList
+    contact:contacts
    });
 })
 

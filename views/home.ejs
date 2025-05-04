@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <h1>Renderd From EJS </h1>
+        <div>
+            <ul>
+                <%for (i of contact){%>
+                    <li>
+                        <p>
+                           <%=i.name%>
+                        </p>
+                        <p>
+                               <%=i.phone%>
+                        </p>
+                        <a href="/deleteContact/?phone=<%=i.phone%>">X</a>
+                    </li>
+                <%}%>
+            </ul>
+        </div>
+
+
+
+        <form action="/createContact" method="post">
+            <input type="text" name="name" required placeholder="Enter Name">
+            <input type="number" name="phone" required placeholder="Enter Number">
+            <button type="submit">SUBMIT</button>
+        </form>
+        <script type="text/javascript"  src="/js/home.js"></script>
+    </body>
+</html>
